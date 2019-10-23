@@ -1,4 +1,7 @@
 import React from 'react';
+// import { MemoryRouter as Router } from 'react-router';
+import { Link as RouterLink } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,7 +23,13 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-
+  
+  const Link1 = React.forwardRef((props, ref) => (
+    <RouterLink innerRef={ref} to="/" {...props} />
+  ));
+  const Link2 = React.forwardRef((props, ref) => (
+    <RouterLink innerRef={ref} to="/favorites-page" {...props} />
+  ));
 const WeatherHeader = () => {
     const classes = useStyles();
     return (
@@ -33,8 +42,12 @@ const WeatherHeader = () => {
           <Typography variant="h6" className={classes.title}>
             Herolo Weather Task
           </Typography>
-          <Button color="inherit">HOME</Button>
-          <Button color="inherit">FAVORITES</Button>
+            <Button color="inherit"  component={Link1}>
+                HOME
+            </Button>
+            <Button color="inherit"  component={Link2}>
+              FAVORITES
+            </Button>
         </Toolbar>
       </AppBar>
     </div>
