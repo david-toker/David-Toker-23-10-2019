@@ -2,10 +2,10 @@ import Actions from "./actions.config";
 
 const initialState = {
     favorites: [],
-    countries: [],
 
     fiveDayWeather: [],
-    search: []
+    search: null,
+    allDataForCity: null
 }
 
 export default function root(state = initialState, action) {
@@ -19,7 +19,20 @@ export default function root(state = initialState, action) {
 
         case Actions.SEARCH_CITY_BY_NAME: {
             const {search} = action.payload;
-            return {...state, search}
+            return {...state, search: search[0]}
+        }
+
+        case Actions.GET_CITY_WEATHER: {
+            const {allDataForCity} = action.payload;
+            return {...state, allDataForCity}
+        }
+
+        case Actions.ADD_TO_FAVORITE: {
+            const key = action.payload;
+            return {
+                ...state,
+                favorites: [...favorites, key]
+            }
         }
 
         default: {

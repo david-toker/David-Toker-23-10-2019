@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DailyWeatherItem({date, temperature}) {
+export default function DailyWeatherItem({date, maxTemp, minTemp, units}) {
   const classes = useStyles();
   
 
@@ -40,7 +40,7 @@ export default function DailyWeatherItem({date, temperature}) {
           
         </Typography>
         <Typography variant="body2" component="p">
-          {temperature}
+          {maxTemp}/{minTemp} {units}
         </Typography>
       </CardContent>
     </Card>

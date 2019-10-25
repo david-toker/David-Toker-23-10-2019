@@ -10,9 +10,9 @@ export const getCitySuccessAction = (fiveDayWeather) => {
 }
 
 
-export const getCityAction = () => {
+export const getCityFiveDayAction = (key) => {
     return async (dispatch) => {
-        const result = await Service.getCityDefault();
+        const result = await Service.getFiveDayForecast(key);
         dispatch(getCitySuccessAction(result.data.DailyForecasts))
     }
 }
@@ -29,5 +29,26 @@ export const searchCityAction = (name) => {
     return async (dispatch) => {
         const result = await Service.searchCity(name);
         dispatch(searchCitySuccess(result.data))
+    }
+}
+
+export const CityWeatherDataSuccess = (allDataForCity) => {
+    return {
+        type: Actions.GET_CITY_WEATHER,
+        payload: {allDataForCity}
+    }
+}
+
+export const getCityCurrentConditions = (key) => {
+    return async (dispatch) => {
+        const result = await Service.getCurrentConditions(key);
+        dispatch(CityWeatherDataSuccess(result))
+    }
+}
+
+export const addCityToFavorite = (key) => {
+    return {
+        type: Actions.ADD_TO_FAVORITE,
+        payload:key
     }
 }
