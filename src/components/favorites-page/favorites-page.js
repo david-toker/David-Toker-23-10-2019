@@ -8,12 +8,13 @@ import FavoriteCityCard from '../favorote-city-card/favorite-city-card';
 
 const FavoritesPage = ({favorites}) => {
     console.log(favorites);
-    const favoriteList =  favorites.length ? favorites.map((city, idx)=><FavoriteCityCard key={idx} city={city.city} temperetare={city.weather.Temperature.Imperial.Value} units={city.weather.Temperature.Imperial.Unit} condition={city.weather.WeatherText}/>): <h1>nothing added yet</h1>
+    const favoriteList =  favorites.length ? favorites.map((city, idx)=><FavoriteCityCard key={idx} city={city.city} temperetare={city.weather.Temperature.Imperial.Value} units={city.weather.Temperature.Imperial.Unit} condition={city.weather.WeatherText}
+    image={city.weather.WeatherIcon}/>): <h1>nothing added yet</h1>
     return (
         <div>
             <Container>
                 <h1>favorites page</h1>
-                <Grid container spacing={4}
+                <Grid container
                     direction="row"
                     justify="flex-start"
                     alignItems="stretch">

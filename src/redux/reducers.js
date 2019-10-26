@@ -8,6 +8,13 @@ const initialState = {
     allDataForCity: null
 }
 
+const updateFavoriteCards = (arr, idx) => {
+    return [
+        ...arr.slice(0, idx),
+        ...arr.slice(idx+1)
+    ]
+}
+
 export default function root(state = initialState, action) {
     console.log(action.payload)
     switch (action.type) {
@@ -28,11 +35,21 @@ export default function root(state = initialState, action) {
         }
 
         case Actions.ADD_TO_FAVORITE: {
-            const key = action.payload;
+            const city = action.payload;
             const { favorites } = state;
             return {
                 ...state,
-                favorites: [...favorites, key]
+                favorites: [...favorites, city]
+            }
+        }
+        case Actions.REMOVE_FROM_FAVORITE: {
+            const city = action.payload;
+            const { favorites } = state;
+            const itemIndex = favorites.findIndex(({city}) => city === action.payload.city);
+            ;
+            return {
+                ...state,
+                favorites: updateFavoriteCards(favorites, itemIndex)
             }
         }
 

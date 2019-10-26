@@ -46,9 +46,16 @@ export const getCityCurrentConditions = (key) => {
     }
 }
 
-export const addCityToFavorite = (key) => {
+export const addCityToFavorite = (city) => {
     return {
         type: Actions.ADD_TO_FAVORITE,
-        payload:key
+        payload:city
+    }
+}
+
+export const removeCityFromFavorite = (city) => {
+    return {
+        type: Actions.REMOVE_FROM_FAVORITE,
+        payload:city
     }
 }

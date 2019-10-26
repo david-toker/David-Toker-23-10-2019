@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const CityCardHeader = ({city, temperature, units, favorite, addToFavorite}) => {
+const CityCardHeader = ({city, temperature, units, favorite, changeFavoriteCards}) => {
     const classes = useStyles();
     const heartStyle = favorite ? {color:'red'} : {color: 'white'}
     return (
@@ -32,10 +32,16 @@ const CityCardHeader = ({city, temperature, units, favorite, addToFavorite}) => 
                 <MenuIcon />
             </IconButton> */}
             <Typography variant="h6" className={classes.title}>
-                {city} {temperature}{units}
+                {city} {temperature}&deg;{units}
             </Typography>
             <FavoriteIcon style={heartStyle}/>
-            <Button color="inherit" onClick={()=>addToFavorite(city)}>
+            {/* <Button color="inherit" onClick={()=>addToFavorite(city)}>
+              {favorite ? 'Remove from favorires':'Add to Favorites'}
+            </Button>
+            <Button color="inherit" onClick={()=>removeFromFavorite(city)}>
+              temprorary remove
+            </Button> */}
+            <Button color="inherit" onClick={()=>changeFavoriteCards(city)}>
               {favorite ? 'Remove from favorires':'Add to Favorites'}
             </Button>
             </Toolbar>

@@ -40,7 +40,7 @@ export default function DailyWeatherItem({date, maxTemp, minTemp, units}) {
           
         </Typography>
         <Typography variant="body2" component="p">
-          {maxTemp}/{minTemp} {units}
+          {maxTemp}&deg;/{minTemp}&deg; {units}
         </Typography>
       </CardContent>
     </Card>
