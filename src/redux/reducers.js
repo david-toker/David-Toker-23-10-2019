@@ -29,6 +29,7 @@ export default function root(state = initialState, action) {
 
         case Actions.ADD_TO_FAVORITE: {
             const key = action.payload;
+            const { favorites } = state;
             return {
                 ...state,
                 favorites: [...favorites, key]

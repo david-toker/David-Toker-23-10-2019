@@ -35,7 +35,9 @@ const CityCardHeader = ({city, temperature, units, favorite, addToFavorite}) => 
                 {city} {temperature}{units}
             </Typography>
             <FavoriteIcon style={heartStyle}/>
-            <Button color="inherit" onClick={()=>addToFavorite(city)}>Add to Favorites</Button>
+            <Button color="inherit" onClick={()=>addToFavorite(city)}>
+              {favorite ? 'Remove from favorires':'Add to Favorites'}
+            </Button>
             </Toolbar>
         </AppBar>
         </div>

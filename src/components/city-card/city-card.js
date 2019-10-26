@@ -5,11 +5,17 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
 
-import { getCityFiveDayAction, searchCityAction, getCityCurrentConditions } from "../../redux/actions";
+import { getCityFiveDayAction, addCityToFavorite, getCityCurrentConditions } from "../../redux/actions";
 import CityCardHeader from '../city-card-header/city-card-header';
 import DailyWeatherItem from '../daily-weather-item/daily-weather-item';
 
 class CityCard extends Component {
+    constructor(props){
+        super(props);
+        this.state ={
+            isFavorite: false
+        }
+    }
     
     componentDidMount(){
         // this.props.reduxActions.getDefaultCity(this.props.id);
@@ -18,9 +24,29 @@ class CityCard extends Component {
         // console.log(this.props.search)
     }
 
+    componentDidUpdate(prevProps){
+        if(this.props.search!==prevProps.search){
+            const {search, favorites} = this.props;
+            const someFavorite = favorites.some(el=>el.city===search.LocalizedName)
+            console.log(this.props.search);
+            console.log(this.props.favorites);
+            console.log(someFavorite);
+            this.setState({
+                isFavorite: someFavorite
+            })
+        }
+    }
+
     addToFavorite = (city) => {
-        console.log('wooorks', city);
-        console.log(this.props.search.Key);
+        // console.log('wooorks', city);
+        // console.log(this.props.search.Key);
+        // console.log(this.props.allDataForCity.data[0]);
+        this.props.reduxActions.addCityToFavorite({weather: this.props.allDataForCity.data[0], city: city});
+        this.setState((state)=>{
+            return {
+                isFavorite: !state.isFavorite
+            }
+        })
     }
     render() {
         const { fiveDayWeather, allDataForCity} = this.props;
@@ -44,7 +70,7 @@ class CityCard extends Component {
             <Grid item xs={12} sm={12} md={12}>
             <div>
                 <CityCardHeader city={LocalizedName} temperature={allDataForCity.data[0].Temperature.Imperial.Value} units={allDataForCity.data[0].Temperature.Imperial.Unit}
-                favorite={true}
+                favorite={this.state.isFavorite}
                 addToFavorite={this.addToFavorite}/>
                 <Grid container spacing={4}>
                     {cardsDay}
@@ -70,8 +96,8 @@ class CityCard extends Component {
 // }
 
 const mapStateToProps = (state) => {
-    const { fiveDayWeather, allDataForCity, search } = state;
-    return {fiveDayWeather, allDataForCity, search};
+    const { fiveDayWeather, allDataForCity, search, favorites } = state;
+    return {fiveDayWeather, allDataForCity, search, favorites};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -80,6 +106,9 @@ const mapDispatchToProps = (dispatch) => {
         reduxActions: {
             getCityCurrentConditions: (key) => {
                 dispatch(getCityCurrentConditions(key))
+            },
+            addCityToFavorite: (city) => {
+                dispatch(addCityToFavorite(city))
             }
             
 

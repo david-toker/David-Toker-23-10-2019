@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const apiKey = "n8pQM79ZR8Ivygs8fXKxeGdxJGxZYXi0"
-// const apiKey = "5Aew1mbFBJXAWZ281OAGnv6meJumFSGk"
+// const apiKey = "n8pQM79ZR8Ivygs8fXKxeGdxJGxZYXi0"
+const apiKey = "5Aew1mbFBJXAWZ281OAGnv6meJumFSGk"
 
 function getCityDefault(key) {
     return axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=${apiKey}`);
