@@ -5,7 +5,8 @@ const initialState = {
 
     fiveDayWeather: [],
     search: null,
-    allDataForCity: null
+    allDataForCity: null,
+    error: null
 }
 
 const updateFavoriteCards = (arr, idx) => {
@@ -16,7 +17,6 @@ const updateFavoriteCards = (arr, idx) => {
 }
 
 export default function root(state = initialState, action) {
-    console.log(action.payload)
     switch (action.type) {
 
         case Actions.GET_DEFAULT_CITY_SUCCESS: {
@@ -28,6 +28,14 @@ export default function root(state = initialState, action) {
             const {search} = action.payload;
             return {...state, search: search[0]}
         }
+
+        case Actions.SEARCH_CITY_BY_NAME_FAILURE: {
+            const {error} = action.payload;
+            return {
+                ...state,
+                error
+            }
+        };
 
         case Actions.GET_CITY_WEATHER: {
             const {allDataForCity} = action.payload;
@@ -43,7 +51,6 @@ export default function root(state = initialState, action) {
             }
         }
         case Actions.REMOVE_FROM_FAVORITE: {
-            const city = action.payload;
             const { favorites } = state;
             const itemIndex = favorites.findIndex(({city}) => city === action.payload.city);
             ;

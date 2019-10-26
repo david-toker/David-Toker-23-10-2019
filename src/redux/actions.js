@@ -25,10 +25,30 @@ export const searchCitySuccess = (search) => {
     }
 }; 
 
+
+const searchError = (error) => {
+    return {
+      type: Actions.SEARCH_CITY_BY_NAME_FAILURE,
+      payload: {error}
+    };
+};
+
+
+// export const searchCityAction = (name) => {
+//     return async (dispatch) => {
+//         const result = await Service.searchCity(name);
+//         dispatch(searchCitySuccess(result.data))
+//     }
+// }
 export const searchCityAction = (name) => {
     return async (dispatch) => {
-        const result = await Service.searchCity(name);
-        dispatch(searchCitySuccess(result.data))
+        try {
+            const result = await Service.searchCity(name);
+            dispatch(searchCitySuccess(result.data))
+        } catch (error) {
+            dispatch(searchError(error))
+        }
+        
     }
 }
 

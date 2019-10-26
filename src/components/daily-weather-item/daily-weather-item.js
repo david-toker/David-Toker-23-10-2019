@@ -2,9 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
@@ -30,14 +28,14 @@ export default function DailyWeatherItem({date, maxTemp, minTemp, units}) {
   
 
   return (
-    <Grid item xs={6} sm={4} md={2}>
+    <Grid item xs={12} sm={4} md={2}>
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
         {moment(date).format('dddd')}
         </Typography>
         <Typography variant="h5" component="h2">
-          
+          {moment(date).format("MMM Do YY")}
         </Typography>
         <Typography variant="body2" component="p">
           {maxTemp}&deg;/{minTemp}&deg; {units}
