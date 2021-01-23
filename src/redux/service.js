@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const apiKey = "n8pQM79ZR8Ivygs8fXKxeGdxJGxZYXi0"
+const apiKey = REACT_APP_ACCUWEATHER_API_KEY;
 
 
 function getCityDefault(key) {
