@@ -34,12 +34,6 @@ const searchError = (error) => {
 };
 
 
-// export const searchCityAction = (name) => {
-//     return async (dispatch) => {
-//         const result = await Service.searchCity(name);
-//         dispatch(searchCitySuccess(result.data))
-//     }
-// }
 export const searchCityAction = (name) => {
     return async (dispatch) => {
         try {
